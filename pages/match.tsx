@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import bf from '../utils/bf'
 import kmp from '../utils/kmp'
-import bm from "../utils/bm"
+import bm from '../utils/bm'
 
-export default function match() {
+export default function Match() {
     const [text, setText] = useState('GCATCGCAGAGAGTATACAGTACG')
     const [pattern, setPattern] = useState('GCAGAGAG')
     const [result, setResult] = useState<Array<number>>([])

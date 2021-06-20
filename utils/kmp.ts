@@ -11,6 +11,7 @@ export default function kmp(text: string, pattern: string) {
             i++
             j++
             if (j === n) {
+                console.log(`字符串${text}出现在${i - pattern.length}到${i - 1}`)
                 result.push(i - n)
             }
         } else if (j > 0) {

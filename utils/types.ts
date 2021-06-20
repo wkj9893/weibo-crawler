@@ -11,6 +11,7 @@ export interface Trend {
 }
 
 export interface Weibo {
+    url: string //微博URL
     user: User //  发送微博用户
     created_at: string //  微博创建时间
     content: string //  具体内容
