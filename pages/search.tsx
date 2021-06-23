@@ -152,7 +152,6 @@ export default function Search() {
                     ))}
                 </div>
                 <Weibos weibos={weibos} />
-
             </main>
         </>
     )
@@ -168,13 +167,27 @@ function Weibos({ weibos }: WeibosProps) {
             <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50 ">
                     <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">微博URL</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">发送微博用户</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">微博创建时间</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">具体内容</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">赞数</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">评论数</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">转发数</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">
+                            微博URL
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">
+                            发送微博用户
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">
+                            微博创建时间
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">
+                            具体内容
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">
+                            赞数
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">
+                            评论数
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">
+                            转发数
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -192,16 +205,36 @@ function Weibos({ weibos }: WeibosProps) {
                             <td className="px-6 py-4 whitespace-nowrap">
                                 {weibo.user.username}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap">{weibo.created_at}</td>
-                            <td className="px-6 py-4 whitespace-nowrap"><textarea rows={Math.ceil(weibo.content.length / 20)} cols={50} value={weibo.content} readOnly /></td>
-                            <td className="px-6 py-4 whitespace-nowrap">{weibo.likes_count}</td>
-                            <td className="px-6 py-4 whitespace-nowrap">{weibo.comments_count}</td>
-                            <td className="px-6 py-4 whitespace-nowrap">{weibo.reposts_count}</td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                                {weibo.created_at}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                                <textarea
+                                    rows={
+                                        weibo.content.length < 200
+                                            ? Math.ceil(
+                                                  weibo.content.length / 20
+                                              )
+                                            : 8
+                                    }
+                                    cols={50}
+                                    value={weibo.content}
+                                    readOnly
+                                />
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                                {weibo.likes_count}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                                {weibo.comments_count}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                                {weibo.reposts_count}
+                            </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
         </div>
-
     )
 }

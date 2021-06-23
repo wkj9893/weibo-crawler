@@ -70,7 +70,6 @@ export default function TrendPage() {
     )
 }
 
-
 interface TrendsProps {
     trends: Trend[]
 }
@@ -81,15 +80,23 @@ function TrendsTable({ trends }: TrendsProps) {
             <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50 ">
                     <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">序号</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">关键词</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">热搜次数</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">
+                            序号
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">
+                            关键词
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider uppercase ">
+                            热搜次数
+                        </th>
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                     {trends.map(trend => (
                         <tr key={trend.rank}>
-                            <td className="px-6 py-4 whitespace-nowrap">{trend.rank}</td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                                {trend.rank}
+                            </td>
                             <td className="px-6 py-4 whitespace-nowrap">
                                 <a
                                     href={trend.url}
@@ -108,5 +115,4 @@ function TrendsTable({ trends }: TrendsProps) {
             </table>
         </div>
     )
-
 }

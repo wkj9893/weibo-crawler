@@ -18,15 +18,16 @@ export default async function weibo(req: NextApiRequest, res: NextApiResponse) {
     for (const url of urls) {
         const page = await browser.newPage()
         await page.setCookie({
-            name: (process.env.cookie as string).split('=')[0],
-            value: (process.env.cookie as string).split('=')[1],
-            domain: '.weibo.com',
+            name: (process.env.weibo_cookie as string).split('=')[0],
+            value: (process.env.weibo_cookie as string).split('=')[1],
+            domain: 'weibo.com',
         })
         await page.goto(url)
 
         try {
             const weibo: Weibo = await page.evaluate(async () => {
-                const url = document.location.origin + document.location.pathname
+                const url =
+                    document.location.origin + document.location.pathname
                 const id = document.location.pathname.split('/')[1]
                 const username = (
                     document.querySelector('a.W_f14') as HTMLAnchorElement
@@ -35,19 +36,27 @@ export default async function weibo(req: NextApiRequest, res: NextApiResponse) {
                 const user: User = { id: parseInt(id), username }
 
                 const created_at = (
-                    document.querySelector('.WB_from a.S_txt2') as HTMLAnchorElement
+                    document.querySelector(
+                        '.WB_from a.S_txt2'
+                    ) as HTMLAnchorElement
                 ).title
                 const content = (
                     document.querySelector('.WB_text.W_f14') as HTMLDivElement
                 ).innerText
                 const likes_count = (
-                    document.querySelectorAll('span.pos em')[7] as HTMLEmbedElement
+                    document.querySelectorAll(
+                        'span.pos em'
+                    )[7] as HTMLEmbedElement
                 ).innerText
                 const comments_count = (
-                    document.querySelectorAll('span.pos em')[5] as HTMLEmbedElement
+                    document.querySelectorAll(
+                        'span.pos em'
+                    )[5] as HTMLEmbedElement
                 ).innerText
                 const reposts_count = (
-                    document.querySelectorAll('span.pos em')[3] as HTMLEmbedElement
+                    document.querySelectorAll(
+                        'span.pos em'
+                    )[3] as HTMLEmbedElement
                 ).innerText
                 return {
                     url,
@@ -72,9 +81,10 @@ export default async function weibo(req: NextApiRequest, res: NextApiResponse) {
         // await page.close()
     }
     res.json({ weibos })
-    // await browser.close()
+    await browser.close()
     for (const weibo of weibos) {
         const {
+            url,
             user,
             created_at,
             content,
@@ -83,6 +93,7 @@ export default async function weibo(req: NextApiRequest, res: NextApiResponse) {
             reposts_count,
         } = weibo
         const weiboModel = new WeiboModel({
+            url,
             user,
             created_at,
             content,

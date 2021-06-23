@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 
 const WeiboSchema = new mongoose.Schema({
+    url: String, //微博URL
     user: {
         id: Number,
         username: String,
